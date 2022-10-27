@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Install
 
 Recommended: 
+
 1. Platform: Linux (linux for Windows or docker)
 2. Install NVM to control different version of nodejs (https://github.com/nvm-sh/nvm#install--update-script)
 3. Install NodeJS (to use, run the command in the terminal "nvm use node" - version 18+)
