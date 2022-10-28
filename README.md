@@ -1,12 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is the frontend of HOUSEKEEPERS project using [Next.js](https://nextjs.org/) 
 
 ## Install
 
 Recommended: 
-
 1. Platform: Linux (linux for Windows or docker)
 2. Install NVM to control different version of nodejs (https://github.com/nvm-sh/nvm#install--update-script)
 3. Install NodeJS (to use, run the command in the terminal "nvm use node" - version 18+)
+4. Download [Visual Studio Code](https://code.visualstudio.com/)
+5. Install *Github* in your Visual Studio Code
+6. Install *GitLens* in your Visual Studio Code
 
 ## Getting Started
 
