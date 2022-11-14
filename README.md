@@ -6,7 +6,7 @@ The login session is managed using cookies. Session data is encrypted using [@ha
 
 A live version of this example can be found [here](https://authsignal-next-passwordless-example.vercel.app).
 
-## Deploy your own
+## Deploy your own 
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
