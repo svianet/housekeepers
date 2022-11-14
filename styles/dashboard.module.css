@@ -1,0 +1,18 @@
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.label {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.logo {
+  font-size: 18px;
+  margin: 15px;
+  color: #fff;
+}

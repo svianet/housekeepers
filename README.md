@@ -1,44 +1,45 @@
-This is the frontend of HOUSEKEEPERS project using [Next.js](https://nextjs.org/) 
+# Authsignal Passwordless Login Example
 
-## Install
+This example shows how to integrate Authsignal with Next.js in order to implement passwordless login using email magic links and server-side redirects.
 
-Recommended: 
-1. Platform: Linux (linux for Windows or docker)
-2. Install NVM to control different version of nodejs (https://github.com/nvm-sh/nvm#install--update-script)
-3. Install NodeJS (to use, run the command in the terminal "nvm use node" - version 18+)
-4. Download [Visual Studio Code](https://code.visualstudio.com/)
-5. Install *Github* in your Visual Studio Code
-6. Install *GitLens* in your Visual Studio Code
+The login session is managed using cookies. Session data is encrypted using [@hapi/iron](https://hapi.dev/family/iron).
 
-## Getting Started
+A live version of this example can be found [here](https://authsignal-next-passwordless-example.vercel.app).
 
-First, run the development server:
+## Deploy your own
+
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/authsignal-passwordless&project-name=authsignal-passwordless&repository-name=authsignal-passwordless)
+
+## How to use
+
+Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
 
 ```bash
-npm run dev
+npx create-next-app --example authsignal-passwordless authsignal-passwordless-app
 # or
-yarn dev
+yarn create next-app --example authsignal-passwordless authsignal-passwordless-app
+# or
+pnpm create next-app --example authsignal-passwordless authsignal-passwordless-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Configuration
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Log in to the [Authsignal Portal](https://portal.authsignal.com) and [enable email magic links for your tenant](https://portal.authsignal.com/organisations/tenants/authenticators).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Copy the .env.local.example file to .env.local:
 
-## Learn More
+```
+cp .env.local.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+Set `AUTHSIGNAL_SECRET` as your [Authsignal secret key](https://portal.authsignal.com/organisations/tenants/api).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The `SESSION_TOKEN_SECRET` is used to encrypt the session cookie. Set it to a random string of 32 characters.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To learn more about Authsignal take a look at the [API Documentation](https://docs.authsignal.com/).
