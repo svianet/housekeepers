@@ -1,6 +1,7 @@
+
 import React from 'react'
 import { GetServerSideProps } from 'next'
-import { Profile, Navbar } from '../components'
+import { Navbar, HousekeeperDetail } from '../components'
 import { getSessionFromCookie, User } from '../lib'
 
 interface Props {
@@ -18,12 +19,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   }
 }
 
-const ProfilePage = ({ user }: Props) => {
+const HousekeeperDetailPage = ({ user }: Props) => {
     return <>
     <Navbar user={user}></Navbar>
     <div className="px-6 py-6">
-    <Profile user={user}/>
+    <HousekeeperDetail></HousekeeperDetail>
     </div>    
     </>
 }
-export default ProfilePage;
+export default HousekeeperDetailPage;

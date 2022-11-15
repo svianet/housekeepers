@@ -1,6 +1,5 @@
-import Link from 'next/link'
+import React from 'react'
 import { User } from '../lib'
-import styles from '../styles/dashboard.module.css'
 import { AvailabilityFilter } from './availabilityFilter'
 import { ContactList } from './contactList'
 import { ContactListPaginator } from './contactListPaginator'
