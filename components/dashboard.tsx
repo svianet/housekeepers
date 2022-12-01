@@ -1,5 +1,8 @@
+import { GetServerSideProps } from 'next'
 import React from 'react'
-import { User } from '../lib'
+import { ISearch } from '../interfaces/search'
+import { getSessionFromCookie, User } from '../lib'
+import { searchProfessionals } from '../lib/providers/search'
 import { AvailabilityFilter } from './availabilityFilter'
 import { ContactList } from './contactList'
 import { ContactListPaginator } from './contactListPaginator'
@@ -7,10 +10,11 @@ import { ServiceFilter } from './serviceFilter'
 import { SortBy } from './sortby'
 
 interface Props {
-  user: User | null
+  user: User | null,
+  providers?: ISearch | null,
 }
 
-export const Dashboard = ({ user }: Props) => {
+export const Dashboard = ({ user, providers }: Props) => {
   return (
     <>
       <div className="flex items-center justify-center bg-white py-4">
@@ -41,7 +45,7 @@ export const Dashboard = ({ user }: Props) => {
         </div>
       </div>
       <div className="flex items-center justify-center bg-white p-8">
-        <ContactList></ContactList>
+        <ContactList user={user} providers={providers}></ContactList>
       </div>
       <ContactListPaginator></ContactListPaginator>
     </>

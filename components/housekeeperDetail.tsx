@@ -7,7 +7,7 @@ const people = [
       name: 'Leslie Alexander',
       role: 'Boca Raton, FL',
       hourRate: '$30-$50/hr',
-      imageUrl:
+      image_url:
         'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
       bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
       instagramUrl: '#',
@@ -31,7 +31,7 @@ const people = [
                   <li key={person.name} className="sm:py-8">
                     <div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
                       <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
-                        <img className="rounded-lg object-cover shadow-lg" src={person.imageUrl} alt="" />
+                        <img className="rounded-lg object-cover shadow-lg" src={person.image_url} alt="" />
                       </div>
                       <div className="sm:col-span-2">
                         <div className="space-y-4">

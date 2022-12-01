@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Footer } from '.'
+import toast, { Toaster } from 'react-hot-toast';
 
 type Props = {
   children: React.ReactNode
@@ -16,7 +17,8 @@ export const Layout = (props: Props) => {
         <div className="bg-gray-100">
           {props.children}
         </div>
-        <Footer></Footer>        
+        <Footer></Footer>    
+        <Toaster />    
       </main>
     </>
 )

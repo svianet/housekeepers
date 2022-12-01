@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 const navigation = {
     main: [
-      { name: 'About', href: '#' },
+      { name: 'About', href: '/about' },
       { name: 'Claim', href: '#' },
       { name: 'Privacy', href: '#' },
       { name: 'Terms', href: '#' }
