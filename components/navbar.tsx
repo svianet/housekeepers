@@ -43,7 +43,7 @@ const userNavigation = [
   { name: 'Your profile', href: '/profile' },
   { name: 'Personal information', href: '/personalInformation' },
   { name: 'Settings', href: '/settings' },
-  { name: 'Logout', href: '/logout' },
+  { name: 'Logout', href: '/api/logout' },
 ]
 
 function classNames(...classes: any) {

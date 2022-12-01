@@ -6,12 +6,13 @@ export default async function logout(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== 'POST') {
-    return res.status(405).send({ message: 'Only POST requests allowed' })
-  }
+  // if (req.method !== 'POST') {
+  //   return res.status(405).send({ message: 'Only POST requests allowed' })
+  // }
 
   const cookie = serialize(COOKIE_NAME, '', { maxAge: -1, path: '/' })
 
   res.setHeader('Set-Cookie', cookie)
-  res.send({ success: true })
+  //res.send({ success: true })
+  res.redirect('/')
 }
