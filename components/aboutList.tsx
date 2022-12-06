@@ -1,6 +1,6 @@
 const people = [
     {
-      name: 'Eliandro Gomes',
+      name: 'Eliandro',
       role: 'Member',
       imageUrl:
         '/photo/eliandro.jpeg',
@@ -19,7 +19,7 @@ const people = [
     name: 'Scott',
     role: 'Member',
     imageUrl:
-        '/photo/m_photo-1506794778202-cad84cf45f1d.avif',
+        '/photo/scott.jpeg',
     twitterUrl: '#',
     linkedinUrl: '#',
     },
