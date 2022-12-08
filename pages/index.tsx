@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 }
 
 export default function HomePage({ user, account, providers }: Props) {
-  console.log("HomePage", user, account)
+  console.log("HomePage", user, account, providers)
   // return <><Navbar user={user}></Navbar>
   // {user ? <Dashboard user={user} /> : <Login />}</>
   return <>

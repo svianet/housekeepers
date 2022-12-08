@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next'
 import { AboutList } from '../components'
 import { Navbar } from '../components/navbar'
 import { getSessionFromCookie, User } from '../lib'
-import styles from '../styles/about.module.css'
 
 interface Props {
   user: User | null

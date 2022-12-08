@@ -18,25 +18,15 @@ export async function getProfile(params: any) : Promise<ResponseApi> {
 
 // can be save all user info or partial
 export async function saveProfile(params: IProfile) : Promise<ResponseApi> {
-    const { pers_id } = params.person;
-    const { person } = params;
-    
-    let url = `${API_ENDPOINT}/person`;
+    let url = `${API_ENDPOINT}/account/saveprofile`;
     let method = 'POST';
-    if (pers_id) {
-        // update
-        url += `/${pers_id}`;
-        method = 'PATCH';
-    }
-    console.log(url, pers_id);
     const res = await fetch(url, { 
         headers: {
             'Content-Type': 'application/json'
         },
         method: method,
-        body: JSON.stringify(person) 
+        body: JSON.stringify(params) 
     });
     const data = await res.json();
-    console.log(data);
     return data;
 }

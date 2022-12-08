@@ -9,7 +9,7 @@ import { IProfile } from '../interfaces/profile';
 interface Props {
   user: User | null,
   account?: IAccount | null,
-  profile?: IProfile | null
+  profile: IProfile | undefined
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -20,10 +20,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     let params = { userId: session.user.userId }
     const response = await getProfile(params);
     const profile: IProfile = response.success ? response.data : null;
-    console.log("profile page", profile);
+    // console.log("profile page", profile);
     return { props: { user: session.user, account: session.account, profile: profile } }
   } else {
-    return { props: { user: null } }
+    return { props: { user: null, profile: undefined } }
   }
 }
 

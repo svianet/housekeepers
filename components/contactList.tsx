@@ -1,35 +1,12 @@
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/20/solid'
-import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import { ISearch } from '../interfaces/search'
-import { getSessionFromCookie, User } from '../lib'
-import { searchProfessionals } from '../lib/providers/search'
+import { User } from '../lib'
 
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Paradigm Representative',
-    role: 'Admin',
-    email: 'janecooper@example.com',
-    telephone: '+1-202-555-0170',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-  {
-    name: 'Scott',
-    title: 'Representative',
-    role: 'Admin',
-    email: 'scott@example.com',
-    telephone: '+1-202-555-0170',
-    imageUrl:
-      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
-  }
-  // More people...
-]
 interface Props {
   user: User | null,
-  providers: ISearch[],
+  providers?: ISearch[],
 }
 
 export const ContactList = ({user, providers} : Props) => {

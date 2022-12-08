@@ -11,7 +11,7 @@ import { SortBy } from './sortby'
 
 interface Props {
   user: User | null,
-  providers?: ISearch | null,
+  providers?: ISearch[],
 }
 
 export const Dashboard = ({ user, providers }: Props) => {
@@ -19,14 +19,14 @@ export const Dashboard = ({ user, providers }: Props) => {
     <>
       <div className="flex items-center justify-center bg-white py-4">
         <div className="mx-auto w-full max-w-xs">
-          <label htmlFor="search" className="justify-center block text-sm block font-medium text-gray-700">
+          <label htmlFor="filter" className="justify-center block text-sm block font-medium text-gray-700">
             Find a housekeeper
           </label>
           <div className="relative mt-1 flex items-center">
             <input
               type="text"
-              name="search"
-              id="search"
+              name="filter"
+              id="filter"
               className="block w-full rounded-md border-gray-300 pr-12 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">

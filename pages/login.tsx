@@ -1,11 +1,9 @@
 import { GetServerSideProps } from 'next'
 import { Login, Navbar } from '../components'
-import { IAccount } from '../interfaces/account'
 import { getSessionFromCookie, User } from '../lib'
 
 interface Props {
-  user: User | null,
-  account?: IAccount | null
+  user: User | null
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -14,9 +12,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   const session = await getSessionFromCookie(req.headers.cookie)
   console.log("login", session);
   if (session && new Date(session.expiresAt) > new Date()) {
-    return { props: { user: session.user, account: session.account } }
+    return { props: { user: session.user } }
   } else {
-    return { props: { user: null, account: null } }
+    return { props: { user: null } }
   }
 }
 

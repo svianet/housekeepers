@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { IProfile } from '../interfaces/profile';
 import { User } from '../lib';
 import { ROLE, LANGUAGES } from '../lib/constants';
+import { checkbox2Array, fillArray } from '../lib/util';
 import { notify } from './errorNotification';
 
 interface Props {
   user?: User | null,
-  profile?: IProfile | null
+  profile: IProfile | undefined
 }
 
 const SelectProfile = ({ profile } : Props) => {
@@ -58,7 +59,7 @@ const SelectProfile = ({ profile } : Props) => {
   );
 }
 const PersonLanguages = ({ profile } : Props) => {
-  let initialCheck = new Array(LANGUAGES.length).fill(false);
+  let initialCheck = fillArray(LANGUAGES, "lang_id", profile?.languages);
   
   const [checked, setChecked] = useState(initialCheck)
   const handleCheckboxChange = (index: number, value: boolean) => {
@@ -75,28 +76,27 @@ const PersonLanguages = ({ profile } : Props) => {
         </label>
         <div className="mt-1">
         {
-          LANGUAGES.map((language, index) => (
-            <>
-            <div className="flex items-start">
-              <div className="flex h-5 items-center">
-                <input
-                  key={index}
-                  id={"language-"+language.lang_id}
-                  name={"language-"+language.lang_id}
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                  value={language.lang_id}
-                  checked={checked[index]}
-                  onChange={e => handleCheckboxChange(index, e.target.checked)}
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label htmlFor={"language-"+language.lang_id} className="font-medium text-gray-700">
-                  {language.language_name}
-                </label>
+          LANGUAGES?.map((language, index) => (
+            <div key={language.lang_id}>
+              <div className="flex items-start">
+                <div className="flex h-5 items-center">
+                  <input
+                    id={"language-"+language.lang_id}
+                    name="language"
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    value={language.lang_id}
+                    checked={checked[index]}
+                    onChange={e => handleCheckboxChange(index, e.target.checked)}
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label htmlFor={"language-"+language.lang_id} className="font-medium text-gray-700">
+                    {language.language_name}
+                  </label>
+                </div>
               </div>
             </div>
-            </>
           ))
         }
         </div>
@@ -180,6 +180,7 @@ const PersonPhoto = ({ profile } : Props) => {
   return (
     <>
     <div>
+    {/* <form action="/profile" method="post" encType="multipart/form-data"> */}
       <label className="block text-sm font-medium text-gray-700">Photo</label>
       <div className="mt-1 flex items-center">
         <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
@@ -187,6 +188,7 @@ const PersonPhoto = ({ profile } : Props) => {
             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
         </span>
+        {/* <input type="file" name="avatar" /> */}
         <button
           type="button"
           className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -194,6 +196,7 @@ const PersonPhoto = ({ profile } : Props) => {
           Change
         </button>
       </div>
+    {/* </form> */}
     </div>
     </>
   );
@@ -241,17 +244,18 @@ export const Profile = ({user, profile} : Props) => {
     // const [user, setUser] = useState<User | null>(null);
     // // later...
     // setUser(newUser);
-    const [data, setData] = useState<IProfile | null>(null)
+    const [data, setData] = useState<IProfile | undefined>(undefined)
     const [isLoading, setLoading] = useState(false)
    
-    // setData(profile);
+    //setData(profile);
 
     // 3 - Client, 2 - Housekeeper, 1 - Administrator (needs an enumeration)
     console.log("profile", profile);
 
     const submitProfile = async (event: any) => {
       event.preventDefault();
-      // parameters
+
+      // Get data from the form
       let params: IProfile = {
         person: {
           first_name: event.target.first_name.value,
@@ -261,13 +265,27 @@ export const Profile = ({user, profile} : Props) => {
         role_id: event.target.role_id.value,
         userId: user?.userId
       }
+      // languages
+      if (event.target.language) {
+        params.languages = checkbox2Array(event.target.language);
+      }
+
+      console.log("component profile:", params);
+
+      // API endpoint where we send form data.
+      const url = '/api/profile';
+      // Send the data to the server in JSON format.
+      const JSONdata = JSON.stringify(params);
+      // Form the request for sending data to the server
+      const options = {
+        body: JSONdata,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST'
+      };
+
       // call api
       try {
-        const result = await fetch('/api/profile', {
-          body: JSON.stringify(params),
-          headers: { 'Content-Type': 'application/json' },
-          method: 'POST'
-        });
+        const result = await fetch(url, options);
         const data = await result.json() 
         notify(data);
       } catch (err: any) {
