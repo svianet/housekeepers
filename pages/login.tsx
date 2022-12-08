@@ -10,6 +10,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   req,
 }) => {
   const session = await getSessionFromCookie(req.headers.cookie)
+  console.log("login", session);
   if (session && new Date(session.expiresAt) > new Date()) {
     return { props: { user: session.user } }
   } else {

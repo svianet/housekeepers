@@ -13,5 +13,6 @@ export default async function logout(
   const cookie = serialize(COOKIE_NAME, '', { maxAge: -1, path: '/' })
 
   res.setHeader('Set-Cookie', cookie)
-  res.send({ success: true })
+  //res.send({ success: true })
+  res.redirect('/')
 }

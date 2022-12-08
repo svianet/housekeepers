@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { IAccount } from '../../interfaces/account';
 import { authsignal, createCookieForSession } from '../../lib'
+import { login } from '../../lib/providers/auth';
 
 // This route handles the redirect back from the Authsignal Prebuilt MFA page
 export default async function finalizeLogin(
@@ -18,9 +20,25 @@ export default async function finalizeLogin(
   const { success, user } = await authsignal.validateChallenge({ token })
 
   if (success) {
-    const cookie = await createCookieForSession(user)
-
-    res.setHeader('Set-Cookie', cookie)
+    // login in the backend
+    let params = {
+      userId: user.userId
+    }
+    const response = await login(params);
+    if (response.success) {
+      const account: IAccount = response.data;
+      if (user) {
+        if (account.gender == "M") {
+          account.image_url = '/avatar-male.webp';
+        } else {
+          account.image_url = '/avatar-female.webp';
+        }
+      }
+      const cookie = await createCookieForSession(user, account)
+      res.setHeader('Set-Cookie', cookie)  
+    } else {
+      // @todo login error
+    }
   }
 
   res.redirect('/')

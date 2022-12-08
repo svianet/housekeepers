@@ -28,19 +28,13 @@
 //     </>
 //   )
 // }
-import { User } from '../lib'
-
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { User } from '../lib'
+import { IAccount } from '../interfaces/account'
 
-// const user = {
-//   name: 'Tom Cook',
-//   email: 'tom@example.com',
-//   imageUrl:
-//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-// }
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'About', href: '/about', current: false }
@@ -49,7 +43,7 @@ const userNavigation = [
   { name: 'Your profile', href: '/profile' },
   { name: 'Personal information', href: '/personalInformation' },
   { name: 'Settings', href: '/settings' },
-  { name: 'Logout', href: '/logout' },
+  { name: 'Logout', href: '/api/logout' },
 ]
 
 function classNames(...classes: any) {
@@ -57,14 +51,12 @@ function classNames(...classes: any) {
 }
 
 interface Props {
-  user: User | null
+  user: User | null,
+  account?: IAccount | null
 }
 
-export const Navbar = ({user} : Props) => {
-  console.log(user);
-  if (user) {
-    user.imageUrl = '/avatar-male.webp';
-  }
+export const Navbar = ({user, account} : Props) => {
+  console.log(user, account);
   return (
     <>
       <div>
@@ -128,7 +120,7 @@ export const Navbar = ({user} : Props) => {
                         <div>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
-                            {user ? <img className="h-8 w-8 rounded-full" src={user?.imageUrl} alt="" /> : ''}
+                            {user ? <img className="h-8 w-8 rounded-full" src={account?.image_url} alt={account?.image_url} /> : ''}
                           </Menu.Button>
                         </div>
                         <Transition
@@ -195,11 +187,11 @@ export const Navbar = ({user} : Props) => {
                 <div className="border-t border-gray-700 pt-4 pb-3">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user?.imageUrl} alt="" />
+                      <img className="h-10 w-10 rounded-full" src={account?.image_url} alt={account?.first_name} />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user?.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
+                      <div className="text-base font-medium leading-none text-white">{account?.first_name}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{account?.email}</div>
                     </div>
                     <button
                       type="button"
